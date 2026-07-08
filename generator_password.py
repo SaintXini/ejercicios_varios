@@ -1,7 +1,7 @@
 import random
 import string
 
-def generate_password(min_Length, numbers = True, special_characters = True):
+def generate_password(min_length, numbers = True, special_characters = True):
     letters = string.ascii_letters
     digits = string.digits
     special = string.punctuation
@@ -13,11 +13,11 @@ def generate_password(min_Length, numbers = True, special_characters = True):
         characters += special
 
     pwd = ""
-    meet_criteria = False
+    meets_criteria = False
     has_number = False
     has_special = False
 
-    while not meet_criteria or len(pwd) < min_Length:
+    while not meets_criteria or len(pwd) < min_length:
         new_char = random.choice(characters)
         pwd += new_char
 
@@ -32,6 +32,11 @@ def generate_password(min_Length, numbers = True, special_characters = True):
         if special_characters:
             meets_criteria = meets_criteria and has_special
 
+    return pwd
 
+min_length = int(input("Agrega la cantidad de caracteres para la contraseña: "))
+has_number = input("¿Desea incluir números en la contraseña? (s/n): ").lower() == 's'
+has_special = input("¿Desea incluir caracteres especiales en la contraseña? (s/n): ").lower() == 's'
 
-generate_password(10)
+pwd = generate_password(min_length, has_number, has_special)
+print("La Contraseña creada es: ", pwd)

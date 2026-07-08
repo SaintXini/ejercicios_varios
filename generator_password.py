@@ -34,9 +34,44 @@ def generate_password(min_length, numbers = True, special_characters = True):
 
     return pwd
 
-min_length = int(input("Agrega la cantidad de caracteres para la contraseña: "))
-has_number = input("¿Desea incluir números en la contraseña? (s/n): ").lower() == 's'
-has_special = input("¿Desea incluir caracteres especiales en la contraseña? (s/n): ").lower() == 's'
+# Validar la longitud de la contraseña
+while True:
+    try:
+        min_length = int(input("Agrega la cantidad de caracteres para la contraseña: "))
 
+        if min_length > 0:
+            break
+        else:
+            print("❌ La cantidad debe ser mayor que 0.")
+    except ValueError:
+        print("❌ Solo puedes ingresar números.")
+
+# Validar si desea incluir números
+while True:
+    respuesta = input("¿Desea incluir números en la contraseña? (s/n): ").lower()
+
+    if respuesta == "s":
+        has_number = True
+        break
+    elif respuesta == "n":
+        has_number = False
+        break
+    else:
+        print("❌ Solo puedes escribir 's' o 'n'.")
+
+# Validar si desea incluir caracteres especiales
+while True:
+    respuesta = input("¿Desea incluir caracteres especiales en la contraseña? (s/n): ").lower()
+
+    if respuesta == "s":
+        has_special = True
+        break
+    elif respuesta == "n":
+        has_special = False
+        break
+    else:
+        print("❌ Solo puedes escribir 's' o 'n'.")
+
+# Generar contraseña
 pwd = generate_password(min_length, has_number, has_special)
-print("La Contraseña creada es: ", pwd)
+print("La contraseña creada es:", pwd)
